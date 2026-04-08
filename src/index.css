@@ -6,51 +6,51 @@
 
 @layer base {
   :root {
-    --background: 240 20% 6%;
+    --background: 240 20% 4%;
     --foreground: 210 40% 96%;
 
-    --card: 240 15% 10%;
+    --card: 240 15% 8%;
     --card-foreground: 210 40% 96%;
 
-    --popover: 240 15% 10%;
+    --popover: 240 15% 8%;
     --popover-foreground: 210 40% 96%;
 
-    --primary: 230 80% 60%;
+    --primary: 220 90% 56%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 270 60% 55%;
+    --secondary: 265 70% 58%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 15% 15%;
-    --muted-foreground: 215 20% 60%;
+    --muted: 240 15% 12%;
+    --muted-foreground: 215 20% 55%;
 
-    --accent: 250 70% 58%;
+    --accent: 245 80% 62%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 15% 18%;
-    --input: 240 15% 18%;
-    --ring: 230 80% 60%;
+    --border: 240 12% 14%;
+    --input: 240 12% 14%;
+    --ring: 220 90% 56%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
 
-    --gradient-start: 230 80% 60%;
-    --gradient-end: 270 60% 55%;
-    --glow: 250 70% 58%;
+    --gradient-start: 220 90% 56%;
+    --gradient-end: 265 70% 58%;
+    --glow: 245 80% 62%;
 
-    --glass-bg: 240 15% 12%;
-    --glass-border: 240 15% 22%;
+    --glass-bg: 240 15% 8%;
+    --glass-border: 240 12% 18%;
 
-    --sidebar-background: 240 20% 6%;
+    --sidebar-background: 240 20% 4%;
     --sidebar-foreground: 210 40% 96%;
-    --sidebar-primary: 230 80% 60%;
+    --sidebar-primary: 220 90% 56%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 15% 15%;
+    --sidebar-accent: 240 15% 12%;
     --sidebar-accent-foreground: 210 40% 96%;
-    --sidebar-border: 240 15% 18%;
-    --sidebar-ring: 230 80% 60%;
+    --sidebar-border: 240 12% 14%;
+    --sidebar-ring: 220 90% 56%;
   }
 }
 
@@ -63,45 +63,139 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', sans-serif;
   }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-card/60 backdrop-blur-xl border border-glass-border rounded-xl;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glass-bg) / 0.7) 0%,
+      hsl(var(--glass-bg) / 0.4) 100%
+    );
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid hsl(var(--glass-border) / 0.6);
+    border-radius: var(--radius);
+  }
+
+  .glass-card-elevated {
+    background: linear-gradient(
+      145deg,
+      hsl(var(--glass-bg) / 0.8) 0%,
+      hsl(var(--glass-bg) / 0.5) 50%,
+      hsl(var(--primary) / 0.03) 100%
+    );
+    backdrop-filter: blur(32px) saturate(1.5);
+    -webkit-backdrop-filter: blur(32px) saturate(1.5);
+    border: 1px solid hsl(var(--glass-border) / 0.5);
+    border-radius: var(--radius);
+    box-shadow:
+      0 8px 32px hsl(var(--background) / 0.4),
+      inset 0 1px 0 hsl(var(--glass-border) / 0.3);
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
   }
 
   .gradient-bg {
-    @apply bg-gradient-to-r from-primary to-secondary;
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
   }
 
   .glow-button {
-    @apply gradient-bg text-primary-foreground font-semibold px-6 py-3 rounded-lg transition-all duration-300;
-    box-shadow: 0 0 20px hsl(var(--glow) / 0.3);
+    @apply font-semibold px-6 py-3 rounded-xl transition-all duration-500 ease-out relative overflow-hidden;
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+    color: hsl(var(--primary-foreground));
+    box-shadow:
+      0 0 20px hsl(var(--glow) / 0.25),
+      0 0 60px hsl(var(--glow) / 0.1),
+      inset 0 1px 0 hsl(0 0% 100% / 0.15);
+  }
+
+  .glow-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, hsl(0 0% 100% / 0.15), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
   }
 
   .glow-button:hover {
-    box-shadow: 0 0 30px hsl(var(--glow) / 0.5);
+    box-shadow:
+      0 0 30px hsl(var(--glow) / 0.45),
+      0 0 80px hsl(var(--glow) / 0.2),
+      0 4px 20px hsl(var(--glow) / 0.3),
+      inset 0 1px 0 hsl(0 0% 100% / 0.2);
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  .glow-button:hover::before {
+    opacity: 1;
+  }
+
+  .glow-button:active {
+    transform: translateY(-1px) scale(1);
+    box-shadow:
+      0 0 15px hsl(var(--glow) / 0.3),
+      0 0 40px hsl(var(--glow) / 0.1);
+  }
+
+  .outline-glow-button {
+    @apply font-medium px-5 py-2.5 rounded-xl transition-all duration-500 ease-out relative;
+    border: 1px solid hsl(var(--glass-border) / 0.8);
+    color: hsl(var(--muted-foreground));
+    background: hsl(var(--glass-bg) / 0.3);
+  }
+
+  .outline-glow-button:hover {
+    border-color: hsl(var(--primary) / 0.5);
+    color: hsl(var(--foreground));
+    box-shadow:
+      0 0 20px hsl(var(--primary) / 0.15),
+      inset 0 0 20px hsl(var(--primary) / 0.05);
     transform: translateY(-2px);
+    background: hsl(var(--primary) / 0.08);
   }
 
   .section-padding {
-    @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24;
+    @apply px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32;
+  }
+
+  .nav-link {
+    @apply text-sm font-medium text-muted-foreground transition-all duration-300 relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-0 h-[2px] transition-all duration-300;
+    background: linear-gradient(90deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+  }
+
+  .nav-link:hover {
+    @apply text-foreground;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
   }
 }
 
 @layer utilities {
   .animate-fade-up {
-    animation: fadeUp 0.6s ease-out forwards;
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
     }
     to {
       opacity: 1;
@@ -117,4 +211,41 @@
     from { opacity: 0; }
     to { opacity: 1; }
   }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .stagger-1 { animation-delay: 0.1s; opacity: 0; }
+  .stagger-2 { animation-delay: 0.2s; opacity: 0; }
+  .stagger-3 { animation-delay: 0.3s; opacity: 0; }
+  .stagger-4 { animation-delay: 0.4s; opacity: 0; }
+  .stagger-5 { animation-delay: 0.5s; opacity: 0; }
+  .stagger-6 { animation-delay: 0.6s; opacity: 0; }
 }
