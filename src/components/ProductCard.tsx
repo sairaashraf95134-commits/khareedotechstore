@@ -1,4 +1,4 @@
-import { ShoppingCart, Eye } from "lucide-react";
+import { ShoppingCart, Eye, Star } from "lucide-react";
 import { Product } from "@/contexts/CartContext";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
@@ -16,6 +16,9 @@ const ProductCard = ({ product, onViewDetails, index }: Props) => {
     addToCart(product);
     toast.success(`${product.name} added to cart`);
   };
+
+  const fullStars = Math.floor(product.rating);
+  const hasHalf = product.rating % 1 >= 0.5;
 
   return (
     <div className={`glass-card-elevated overflow-hidden group animate-slide-up stagger-${index + 1}`}
@@ -53,7 +56,26 @@ const ProductCard = ({ product, onViewDetails, index }: Props) => {
 
       {/* Content */}
       <div className="p-6">
-        <h3 className="font-bold text-lg mb-1.5 group-hover:text-primary transition-colors duration-300">{product.name}</h3>
+        <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors duration-300">{product.name}</h3>
+        
+        {/* Star ratings */}
+        <div className="flex items-center gap-1 mb-3">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star
+              key={i}
+              size={14}
+              className={`transition-colors ${
+                i < fullStars
+                  ? "fill-primary text-primary"
+                  : i === fullStars && hasHalf
+                  ? "fill-primary/50 text-primary"
+                  : "text-muted"
+              }`}
+            />
+          ))}
+          <span className="text-xs text-muted-foreground ml-1.5">{product.rating}</span>
+        </div>
+
         <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{product.description}</p>
         <div className="flex gap-3">
           <button onClick={handleAdd} className="flex-1 glow-button text-sm py-2.5 flex items-center justify-center gap-2 rounded-xl">

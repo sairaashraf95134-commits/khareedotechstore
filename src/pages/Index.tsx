@@ -3,7 +3,9 @@ import { CartProvider } from "@/contexts/CartContext";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import IntroSection from "@/components/IntroSection";
+import DiscountBanner from "@/components/DiscountBanner";
 import ProductsSection from "@/components/ProductsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -18,7 +20,9 @@ const Index = () => {
         <Navbar onCartClick={() => setCartOpen(true)} />
         <HeroSection />
         <IntroSection />
+        <DiscountBanner />
         <ProductsSection />
+        <TestimonialsSection />
         <AboutSection />
         <ContactSection />
         <Footer />
