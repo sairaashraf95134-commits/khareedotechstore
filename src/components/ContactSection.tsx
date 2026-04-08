@@ -28,8 +28,8 @@ const ContactSection = () => {
         <div className="space-y-6">
           {[
             { icon: Mail, label: "Email", value: "support@khareedo.com" },
-            { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
-            { icon: MapPin, label: "Address", value: "123 Tech Street, Silicon Valley, CA 94025" },
+            { icon: Phone, label: "Phone", value: "+92 321 1234567" },
+            { icon: MapPin, label: "Address", value: "Shop #12, Hafiz Centre, Main Boulevard, Gulberg III, Lahore, Pakistan" },
           ].map((item) => (
             <div
               key={item.label}
