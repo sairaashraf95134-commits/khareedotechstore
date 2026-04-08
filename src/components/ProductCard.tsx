@@ -47,7 +47,7 @@ const ProductCard = ({ product, onViewDetails, index }: Props) => {
         
         {/* Price badge */}
         <div className="absolute top-4 right-4 glass-card px-3 py-1.5 text-sm font-bold gradient-text">
-          ${product.price}
+          Rs. {product.price.toLocaleString()}
         </div>
       </div>
 

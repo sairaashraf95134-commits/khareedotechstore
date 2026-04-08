@@ -44,7 +44,7 @@ const ProductDetailModal = ({ product, onClose }: Props) => {
               ))}
               <span className="text-sm text-muted-foreground ml-2 font-medium">{product.rating}/5</span>
             </div>
-            <p className="text-3xl font-bold gradient-text mb-5">${product.price}</p>
+            <p className="text-3xl font-bold gradient-text mb-5">Rs. {product.price.toLocaleString()}</p>
             <p className="text-muted-foreground text-sm leading-relaxed mb-8">{product.details}</p>
             <button onClick={handleAdd} className="glow-button flex items-center justify-center gap-2 rounded-xl py-3.5">
               <ShoppingCart size={18} /> Add to Cart

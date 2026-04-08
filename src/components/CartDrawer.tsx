@@ -57,7 +57,7 @@ const CartDrawer = ({ open, onClose }: Props) => {
                   <img src={item.product.image} alt={item.product.name} className="w-16 h-16 rounded-xl object-cover" />
                   <div className="flex-1 min-w-0">
                     <h4 className="font-semibold text-sm truncate">{item.product.name}</h4>
-                    <p className="text-sm gradient-text font-bold">${item.product.price}</p>
+                    <p className="text-sm gradient-text font-bold">Rs. {item.product.price.toLocaleString()}</p>
                     <div className="flex items-center gap-2 mt-2">
                       <button onClick={() => updateQuantity(item.product.id, item.quantity - 1)} className="w-7 h-7 rounded-lg border border-glass-border/60 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/40 transition-all duration-300">
                         <Minus size={13} />
@@ -81,7 +81,7 @@ const CartDrawer = ({ open, onClose }: Props) => {
           <div className="p-6 border-t border-glass-border/50">
             <div className="flex justify-between items-center mb-5">
               <span className="text-muted-foreground font-medium">Total</span>
-              <span className="text-2xl font-bold gradient-text">${totalPrice.toFixed(2)}</span>
+              <span className="text-2xl font-bold gradient-text">Rs. {totalPrice.toLocaleString()}</span>
             </div>
             <button className="w-full glow-button rounded-xl py-4 text-base font-bold">Checkout</button>
           </div>
