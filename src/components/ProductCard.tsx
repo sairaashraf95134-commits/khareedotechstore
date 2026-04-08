@@ -6,9 +6,10 @@ import { toast } from "sonner";
 interface Props {
   product: Product;
   onViewDetails: (product: Product) => void;
+  index: number;
 }
 
-const ProductCard = ({ product, onViewDetails }: Props) => {
+const ProductCard = ({ product, onViewDetails, index }: Props) => {
   const { addToCart } = useCart();
 
   const handleAdd = () => {
@@ -17,7 +18,22 @@ const ProductCard = ({ product, onViewDetails }: Props) => {
   };
 
   return (
-    <div className="glass-card overflow-hidden group hover:border-primary/40 transition-all duration-300 hover:-translate-y-2">
+    <div className={`glass-card-elevated overflow-hidden group animate-slide-up stagger-${index + 1}`}
+      style={{ transition: 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.5s ease' }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget;
+        el.style.transform = 'translateY(-8px) scale(1.02)';
+        el.style.boxShadow = '0 20px 60px hsl(var(--primary) / 0.15), 0 0 40px hsl(var(--glow) / 0.08), inset 0 1px 0 hsl(var(--glass-border) / 0.4)';
+        el.style.borderColor = 'hsl(var(--primary) / 0.3)';
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget;
+        el.style.transform = '';
+        el.style.boxShadow = '';
+        el.style.borderColor = '';
+      }}
+    >
+      {/* Image */}
       <div className="relative overflow-hidden">
         <img
           src={product.image}
@@ -25,20 +41,26 @@ const ProductCard = ({ product, onViewDetails }: Props) => {
           loading="lazy"
           width={512}
           height={512}
-          className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full aspect-square object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+        
+        {/* Price badge */}
+        <div className="absolute top-4 right-4 glass-card px-3 py-1.5 text-sm font-bold gradient-text">
+          ${product.price}
+        </div>
       </div>
-      <div className="p-5">
-        <h3 className="font-semibold text-lg mb-1">{product.name}</h3>
-        <p className="text-muted-foreground text-sm mb-3">{product.description}</p>
-        <p className="text-2xl font-bold gradient-text mb-4">${product.price}</p>
+
+      {/* Content */}
+      <div className="p-6">
+        <h3 className="font-bold text-lg mb-1.5 group-hover:text-primary transition-colors duration-300">{product.name}</h3>
+        <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{product.description}</p>
         <div className="flex gap-3">
-          <button onClick={handleAdd} className="flex-1 glow-button text-sm py-2.5 flex items-center justify-center gap-2 rounded-lg">
-            <ShoppingCart size={16} /> Add to Cart
+          <button onClick={handleAdd} className="flex-1 glow-button text-sm py-2.5 flex items-center justify-center gap-2 rounded-xl">
+            <ShoppingCart size={15} /> Add to Cart
           </button>
-          <button onClick={() => onViewDetails(product)} className="px-4 py-2.5 rounded-lg border border-glass-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-primary/40 transition-all flex items-center gap-2">
-            <Eye size={16} /> Details
+          <button onClick={() => onViewDetails(product)} className="outline-glow-button text-sm flex items-center gap-2">
+            <Eye size={15} /> Details
           </button>
         </div>
       </div>
