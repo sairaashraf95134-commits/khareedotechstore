@@ -37,5 +37,7 @@ If you have cloned this repository to your local machine, follow these steps to 
 ### Installation
 
 1. **Clone the repository:**
-   ```bash https://github.com/sairaashraf95134-commits/khareedotechstore
+   ```bash
+                 https://github.com/sairaashraf95134-commits/khareedotechstore
+   
  
