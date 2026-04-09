@@ -38,5 +38,4 @@ If you have cloned this repository to your local machine, follow these steps to 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/khareedo-tech-store.git
-   cd khareedo-tech-store
+  https://github.com/sairaashraf95134-commits/khareedotechstore
