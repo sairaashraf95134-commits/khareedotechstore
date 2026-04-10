@@ -25,6 +25,7 @@ const Index = () => {
         <ProductsSection />
         <TestimonialsSection />
         <AboutSection />
+        <CustomEmbedSection />
         <ContactSection />
         <Footer />
         <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
