@@ -17,12 +17,13 @@ const CustomEmbedSection = () => {
             className="w-full min-h-[400px] rounded-xl overflow-hidden"
             dangerouslySetInnerHTML={{
               __html: `
-                <div style="width:100%;height:400px;display:flex;align-items:center;justify-content:center;background:rgba(139,92,246,0.08);border-radius:12px;border:2px dashed rgba(139,92,246,0.3);">
-                  <p style="color:#a78bfa;font-size:1.125rem;text-align:center;padding:2rem;">
-                    Paste your custom HTML or iframe embed code here.<br/>
-                    <span style="font-size:0.875rem;opacity:0.7;">Edit the <code>dangerouslySetInnerHTML</code> in CustomEmbedSection.tsx</span>
-                  </p>
-                </div>
+                <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+                <df-messenger
+                  intent="WELCOME"
+                  chat-title="Khareedo_Support_Bot"
+                  agent-id="91d374e0-bcda-4c7b-ab34-be685e44ea5f"
+                  language-code="en"
+                ></df-messenger>
               `,
             }}
           />
